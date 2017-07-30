@@ -4,6 +4,8 @@ import 'rxjs/add/operator/map';
 
 import 'rxjs/add/operator/toPromise';
 
+import { Expense } from './../models/expense';
+
 @Injectable()
 export class ExpenseService {
   private headers = new Headers({'Content-Type': 'application/json'});
@@ -12,10 +14,10 @@ export class ExpenseService {
 
   constructor(private http: Http) { }
 
-  getAll(): Promise<{}> {
+  getAll(): Promise<Expense[]> {
     return this.http.get(this.onlineUrl+"list")
                .toPromise()
-               .then(response => response.json())
+               .then(response => response.json() as Expense[])
                .catch(this.handleError);
   }
 

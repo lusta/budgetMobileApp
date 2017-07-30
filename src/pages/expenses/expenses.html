@@ -9,5 +9,14 @@
 
 
 <ion-content padding>
-
+<ion-list>
+  <ion-item *ngFor="let item of data" (click)="viewExpenseItems(item)">
+    <ion-thumbnail item-start>
+      <img src="https://png.icons8.com/shop/color/24" title="Shop" width="24" height="24">
+    </ion-thumbnail>
+    <h2>{{item.name}}</h2>
+    <p>{{item.description}} • R {{item.amount}}</p>
+    <button ion-button clear item-end>View</button>
+  </ion-item>
+</ion-list>
 </ion-content>
