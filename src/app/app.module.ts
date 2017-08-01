@@ -10,8 +10,9 @@ import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 
 import { HttpModule } from '@angular/http';
-import { ExpenseService } from './../providers/expense-service';
 import { AuthService } from './../providers/auth-service';
+import { ExpenseService } from './../providers/expense-service';
+import { ExpenseItemService } from './../providers/expense-item-service';
  
 import { MyApp } from './app.component';
 import {HomePage} from '../pages/home/home';
@@ -64,6 +65,7 @@ import { ExpenseItems } from './../pages/expense-items/expense-items';
     FilePath,
     AuthService,
     ExpenseService,
+    ExpenseItemService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -1,24 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ExpenseItems page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { ExpenseItemService } from './../../providers/expense-item-service';
 
 @Component({
   selector: 'page-expense-items',
   templateUrl: 'expense-items.html',
 })
-export class ExpenseItems {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+export class ExpenseItems implements OnInit{
+  data : any;
+  expense : any;
+  constructor(
+    public navParams: NavParams,
+    public navCtrl: NavController,
+    public EiService : ExpenseItemService) {
+    this.expense = navParams.get('item');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ExpenseItems');
+  }
+
+  ngOnInit() {
+    this.getExpenseItems();
+  }
+
+  getExpenseItems() : void{
+   this.EiService.getAll(this.expense)
+    .then(expenseItems => {
+      expenseItems.forEach(element => {
+        this.data.push(element);
+      });
+    });
   }
 
 }
