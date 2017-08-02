@@ -29,6 +29,7 @@
     "@ionic-native/transfer": "^3.14.0",
     "@ionic/storage": "2.0.1",
     "ajv": "^5.2.2",
+    "chart.js": "^2.6.0",
     "ionic-angular": "3.5.3",
     "ionic-native": "^2.9.0",
     "ionicons": "3.0.0",

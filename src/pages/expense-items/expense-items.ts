@@ -7,7 +7,7 @@ import { ExpenseItemService } from './../../providers/expense-item-service';
   templateUrl: 'expense-items.html',
 })
 export class ExpenseItems implements OnInit{
-  data : any;
+ data : any = [];
   expense : any;
   constructor(
     public navParams: NavParams,
