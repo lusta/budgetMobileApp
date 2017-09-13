@@ -25,7 +25,7 @@ export class AuthService {
   public login(credentials, type) {
     return new Promise((resolve, reject) =>{
       let headers = new Headers();
-      this.http.post(hostedUrl+type, credentials, {headers: headers}).
+      this.http.post(apiUrl+type, credentials, {headers: headers}).
       subscribe(res =>{
         resolve(res.json());
       }, (err) =>{

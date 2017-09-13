@@ -24,6 +24,7 @@ import { Budget } from './../pages/budget/budget';
 import { Income } from './../pages/income/income';
 import { Summary } from './../pages/summary/summary';
 import { ExpenseItems } from './../pages/expense-items/expense-items';
+import {AddExpensePage} from './../pages/expenses/add-expense/add-expense';
  
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ExpenseItems } from './../pages/expense-items/expense-items';
     Summary,
     Register,
     ExpensePage,
-    ExpenseItems
+    ExpenseItems,
+    AddExpensePage
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { ExpenseItems } from './../pages/expense-items/expense-items';
     Profile,
     Register,
     ExpensePage,
-    ExpenseItems
+    ExpenseItems,
+    AddExpensePage
   ],
   providers: [
     StatusBar,

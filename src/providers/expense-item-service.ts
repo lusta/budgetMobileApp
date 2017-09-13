@@ -17,10 +17,10 @@ export class ExpenseItemService {
 
   getAll(expenseId): Promise<ExpenseItem[]> {
     this.data = {
-      expenseId : JSON.stringify(expenseId),
+      expense : JSON.stringify(expenseId),
       headers: this.headers
     };
-    return this.http.get(this.onlineUrl+"list", this.data)
+    return this.http.get(this.baseUrl+"list", this.data)
         .toPromise()
         .then(response => response.json() as ExpenseItem[])
         .catch(this.handleError);

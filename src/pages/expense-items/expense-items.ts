@@ -27,6 +27,7 @@ export class ExpenseItems implements OnInit{
   getExpenseItems() : void{
    this.EiService.getAll(this.expense)
     .then(expenseItems => {
+      console.log("expenseItems", expenseItems);
       expenseItems.forEach(element => {
         this.data.push(element);
       });
