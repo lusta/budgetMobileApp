@@ -35,8 +35,8 @@ export class ExpensePage implements OnInit {
         });
       });
   }
-  addExpense() : any {
-    console.log('clicked');
+  addExpense(AddExpensePage) : any {
+    this.presentPopover(AddExpensePage);
   }
 
   presentToast(message : any) {
@@ -47,8 +47,8 @@ export class ExpensePage implements OnInit {
     toast.present();
   }
 
-  presentPopover() {
-    let popover = this.popoverCtrl.create(AddExpensePage);
+  presentPopover(page : any) {
+    let popover = this.popoverCtrl.create(page);
     popover.present();
   }
 

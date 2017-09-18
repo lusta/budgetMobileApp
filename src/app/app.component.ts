@@ -3,20 +3,21 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Profile } from '../pages/profile/profile';
-import { HomePage } from '../pages/home/home';
 import { Login } from '../pages/login/login';
+import { UserLogin } from '../pages/user-login/user-login';
 import { Budget } from './../pages/budget/budget';
 import { Summary } from './../pages/summary/summary';
 import { Income } from './../pages/income/income';
 import { ExpensePage } from './../pages/expenses/expenses';
+import { Dashboard } from '../pages/dashboard/dashboard';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = Login;
-  pages: Array<{title: string, component: any}>;
+  rootPage:any = UserLogin;
+  pages: Array<{title: string, icon:string, component: any}>;
 
   constructor(
     public platform: Platform,
@@ -28,12 +29,12 @@ export class MyApp {
 
     // set our app's pages
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'Income', component: Income },
-      { title: 'Expenses', component: ExpensePage },
-      { title: 'Budget', component: Budget },
-      { title: 'Summary', component: Summary },
-      { title: 'Profile', component: Profile }
+      { title: 'Dashboard', icon:'home', component: Dashboard },
+      { title: 'Income' , icon:'cash', component: Income },
+      { title: 'Expenses', icon:'cart', component: ExpensePage },
+      { title: 'Budget', icon:'briefcase', component: Budget },
+      { title: 'Summary', icon:'settings', component: Summary },
+      { title: 'Profile', icon:'contact', component: Profile }
     ];
   }
 

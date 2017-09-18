@@ -2,7 +2,7 @@ import { ExpensePage } from './../expenses/expenses';
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading, MenuController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
-import {HomePage} from '../home/home';
+import { Dashboard } from '../dashboard/dashboard';
 import { Register } from './../register/register';
 
 @Component({
@@ -32,7 +32,7 @@ export class Login {
         if(this.resposeData.success) {
           localStorage.setItem('userData', JSON.stringify(this.resposeData) )
           this.menu.enable(true);
-          this.nav.push(HomePage);
+          this.nav.push(Dashboard);
         }
         else {
           this.showError(this.resposeData.msg);

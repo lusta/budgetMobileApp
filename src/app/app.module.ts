@@ -13,9 +13,13 @@ import { HttpModule } from '@angular/http';
 import { AuthService } from './../providers/auth-service';
 import { ExpenseService } from './../providers/expense-service';
 import { ExpenseItemService } from './../providers/expense-item-service';
+
+import { UserLogin } from '../pages/user-login/user-login';
+import { UserSignup } from '../pages/user-signup/user-signup';
+import { UserForgotpassword } from '../pages/user-forgotpassword/user-forgotpassword';
+import { Dashboard } from '../pages/dashboard/dashboard';
  
 import { MyApp } from './app.component';
-import {HomePage} from '../pages/home/home';
 import { Profile } from './../pages/profile/profile';
 import { Login } from './../pages/login/login';
 import { Register } from './../pages/register/register';
@@ -29,16 +33,19 @@ import {AddExpensePage} from './../pages/expenses/add-expense/add-expense';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     Profile,
     Login,
     Budget,
     Income,
     Summary,
     Register,
+    Dashboard,
     ExpensePage,
     ExpenseItems,
-    AddExpensePage
+    AddExpensePage,
+    UserLogin,
+    UserSignup,
+    UserForgotpassword,
   ],
   imports: [
     BrowserModule,
@@ -52,12 +59,15 @@ import {AddExpensePage} from './../pages/expenses/add-expense/add-expense';
     Budget,
     Income,
     Summary,
-    HomePage,
+    Dashboard,
     Profile,
     Register,
     ExpensePage,
     ExpenseItems,
-    AddExpensePage
+    AddExpensePage,
+    UserLogin,
+    UserSignup,
+    UserForgotpassword,
   ],
   providers: [
     StatusBar,
