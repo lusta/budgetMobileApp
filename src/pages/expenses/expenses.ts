@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ToastController, NavParams, PopoverController } from 'ionic-angular';
+import { NavController, ToastController, NavParams } from 'ionic-angular';
 import { ExpenseService } from './../../providers/expense-service';
 
 import { Expense } from './../../models/expense';
@@ -17,14 +17,13 @@ export class ExpensePage implements OnInit {
     public navParams: NavParams,
     public Nav : NavController,
     public expenseApi :ExpenseService,
-    public toastCtrl: ToastController,
-    public popoverCtrl: PopoverController ) {}
+    public toastCtrl: ToastController) {}
 
   ngOnInit(){
     this.getExpenses();
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ExpensePage');
+
   }
 
   getExpenses() : void{
@@ -35,8 +34,9 @@ export class ExpensePage implements OnInit {
         });
       });
   }
-  addExpense(AddExpensePage) : any {
-    this.presentPopover(AddExpensePage);
+
+  addExpense() : any {
+    this.Nav.push(AddExpensePage);
   }
 
   presentToast(message : any) {
@@ -45,11 +45,6 @@ export class ExpensePage implements OnInit {
       duration: 3000
     });
     toast.present();
-  }
-
-  presentPopover(page : any) {
-    let popover = this.popoverCtrl.create(page);
-    popover.present();
   }
 
   viewExpenseItems(item : any) {

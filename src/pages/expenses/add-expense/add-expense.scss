@@ -1,3 +1,13 @@
 page-add-expense {
+    ion-content{
+        ion-list {
+            .item{background:transparent;font-size:$menu_font_size;}
+            .item-inner{
+                border-bottom: 1px solid $menu_separator_line_color !important;
+                img{width: 25px;height: 25px;vertical-align: middle;margin-right: 10px;margin-bottom: 5px;}
+                ion-icon{width:30px; height:30px; vertical-align: middle;  font-size:1.9em;  }
+            }
 
+       }
+}
 }

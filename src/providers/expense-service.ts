@@ -15,7 +15,7 @@ export class ExpenseService {
   constructor(private http: Http) { }
 
   getAll(): Promise<Expense[]> {
-    return this.http.get(this.onlineUrl+"list")
+    return this.http.get(this.baseUrl+"list")
                .toPromise()
                .then(response => response.json() as Expense[])
                .catch(this.handleError);
@@ -39,8 +39,9 @@ export class ExpenseService {
   }
 
   create(expense : any): Promise<{}> {
+    const url = `${this.baseUrl}${'add'}`;
     return this.http
-      .post(this.baseUrl, JSON.stringify(expense), {headers: this.headers})
+      .post(url, JSON.stringify(expense), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
