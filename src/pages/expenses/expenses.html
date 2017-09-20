@@ -5,9 +5,7 @@
     </button>
     <ion-title>Expenses</ion-title>
     <ion-buttons end>
-      <button (click)="addExpense()">
-        <ion-icon name="add"></ion-icon>
-      </button>
+      <button (click)="addExpense()" ion-fab>Add</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -15,13 +13,30 @@
 
 <ion-content padding>
 <ion-list>
-  <ion-item *ngFor="let item of data" (click)="viewExpenseItems(item)">
-    <ion-thumbnail item-start>
-      <img src="..//assets/img/cart.png" title="Checked" width="20" height="20">
-    </ion-thumbnail>
-    <h2>{{item.name}}</h2>
-    <p>{{item.description}} • R {{item.amount}}</p>
-    <button ion-button clear item-end>View</button>
-  </ion-item>
-</ion-list>
+    <ion-item-sliding *ngFor="let item of data">
+       <ion-item (click)="viewExpenseItems(item)">
+        <ion-avatar item-start>
+          <img src="..//assets/img/cart.png">
+        </ion-avatar>
+        <h2>{{item.name}}</h2>
+        <p>{{item.description}} • R {{item.amount}}</p>
+      </ion-item>
+      <ion-item-options side="left">
+        <button (click)="edit(item)" class="add" ion-button>
+          <ion-icon name="add"></ion-icon>
+          Edit
+        </button>
+        <button (click)="addExpenseItem(item._id)" ion-button>
+          <ion-icon name="add"></ion-icon>
+          Add
+        </button>
+      </ion-item-options>
+      <ion-item-options side="right">
+        <button (click)="remove(item._id)" ion-button>
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

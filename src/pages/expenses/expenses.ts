@@ -4,7 +4,8 @@ import { ExpenseService } from './../../providers/expense-service';
 
 import { Expense } from './../../models/expense';
 import { ExpenseItems } from './../expense-items/expense-items';
-import {AddExpensePage} from './add-expense/add-expense';
+import { AddExpensePage } from './add-expense/add-expense';
+import { AddExpenseItemPage } from './../../pages/expense-items/add-expense-item/add-expense-item';
 
 @Component({
   selector: 'page-expense',
@@ -45,6 +46,21 @@ export class ExpensePage implements OnInit {
       duration: 3000
     });
     toast.present();
+  }
+
+  addExpenseItem(expense : any) {
+    console.log("expense", expense);
+    this.Nav.push(AddExpenseItemPage, {
+      expense : expense
+    });
+  }
+
+  remove(expense : any) {
+    console.log("not implemented yet");
+  }
+
+  edit(expense : any) {
+    console.log("not implemented yet");
   }
 
   viewExpenseItems(item : any) {
