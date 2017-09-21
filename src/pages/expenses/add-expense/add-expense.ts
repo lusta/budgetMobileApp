@@ -67,7 +67,7 @@ export class AddExpensePage {
     }).
     catch(error => {
       this.hideLoading();
-      this.presentToast(error);
+      this.presentToast("Ooops something went wrong");
     });
   }
 

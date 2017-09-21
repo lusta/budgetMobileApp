@@ -13,7 +13,7 @@ export class User {
   }
 }
  
-let apiUrl = "http://localhost:8080/api/",
+let apiUrl = "http://localhost:8080/auth/",
     hostedUrl = "http://budget.openode.io/api/";
 
 @Injectable()

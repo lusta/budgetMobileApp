@@ -3,7 +3,6 @@ import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Profile } from '../pages/profile/profile';
-import { Login } from '../pages/login/login';
 import { UserLogin } from '../pages/user-login/user-login';
 import { Budget } from './../pages/budget/budget';
 import { Summary } from './../pages/summary/summary';
@@ -15,10 +14,11 @@ import { Dashboard } from '../pages/dashboard/dashboard';
   templateUrl: 'app.html'
 })
 export class MyApp {
+  userData = localStorage.getItem('userData');
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = UserLogin;
+  rootPage:any = this.userData !== null ? Dashboard : UserLogin;
   pages: Array<{title: string, icon:string, component: any}>;
-
+  
   constructor(
     public platform: Platform,
     public menu: MenuController,
@@ -26,7 +26,6 @@ export class MyApp {
     public splashscreen : SplashScreen
   ) {
     this.initializeApp();
-
     // set our app's pages
     this.pages = [
       { title: 'Dashboard', icon:'home', component: Dashboard },
@@ -34,7 +33,8 @@ export class MyApp {
       { title: 'Expenses', icon:'cart', component: ExpensePage },
       { title: 'Budget', icon:'briefcase', component: Budget },
       { title: 'Summary', icon:'settings', component: Summary },
-      { title: 'Profile', icon:'contact', component: Profile }
+      { title: 'Profile', icon:'contact', component: Profile },
+      { title: 'Log out', icon:'exit', component: UserLogin }
     ];
   }
 
@@ -51,6 +51,9 @@ export class MyApp {
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
+    if (page.component === UserLogin) {
+      localStorage.removeItem('userData');
+    }
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);
   }

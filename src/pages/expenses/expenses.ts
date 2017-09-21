@@ -33,7 +33,10 @@ export class ExpensePage implements OnInit {
         expenses.forEach(element => {
           this.data.push(element);
         });
-      });
+      }).
+      catch(error => {
+      this.presentToast("Ooops something went wrong!");
+    });
   }
 
   addExpense() : any {
@@ -49,7 +52,6 @@ export class ExpensePage implements OnInit {
   }
 
   addExpenseItem(expense : any) {
-    console.log("expense", expense);
     this.Nav.push(AddExpenseItemPage, {
       expense : expense
     });
