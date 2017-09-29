@@ -3,11 +3,13 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
+import { UserData } from './userData';
 
 import { HttpModule } from '@angular/http';
 import { AuthService } from './../providers/auth-service';
@@ -52,7 +54,8 @@ import { AddExpenseItemPage } from './../pages/expense-items/add-expense-item/ad
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -78,11 +81,12 @@ import { AddExpenseItemPage } from './../pages/expense-items/add-expense-item/ad
     File,
     Transfer,
     Camera,
+    UserData,
     FilePath,
     AuthService,
     ExpenseService,
     ExpenseItemService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}

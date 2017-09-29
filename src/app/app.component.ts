@@ -1,3 +1,5 @@
+import { Storage } from '@ionic/storage';
+import { UserData } from './userData';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -14,17 +16,21 @@ import { Dashboard } from '../pages/dashboard/dashboard';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  userData = localStorage.getItem('userData');
+
+  isLoggedIn : any;
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = this.userData !== null ? Dashboard : UserLogin;
+  rootPage:any;
   pages: Array<{title: string, icon:string, component: any}>;
   
   constructor(
     public platform: Platform,
+    private storage : Storage,
+    private userData : UserData,
     public menu: MenuController,
     public statusBar : StatusBar,
     public splashscreen : SplashScreen
   ) {
+    this.rootPage = this.userData.isLoggedIn() ? Dashboard : UserLogin;
     this.initializeApp();
     // set our app's pages
     this.pages = [
@@ -52,7 +58,8 @@ export class MyApp {
     // close the menu when clicking a link from the menu
     this.menu.close();
     if (page.component === UserLogin) {
-      localStorage.removeItem('userData');
+      //localStorage.removeItem('userData');
+      this.userData.removeUserData();
     }
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);

@@ -58,11 +58,21 @@ export class ExpensePage implements OnInit {
   }
 
   remove(expense : any) {
-    console.log("not implemented yet");
+    this.expenseApi.delete(expense)
+      .then(result => {
+        this.presentToast(result.message);
+      }).catch(err => {
+        this.presentToast("Ooops something went wrong!");
+      });
   }
 
   edit(expense : any) {
-    console.log("not implemented yet");
+    this.expenseApi.update(expense)
+      .then(result => {
+        this.presentToast(result.message);
+      }).catch(err => {
+        this.presentToast("Ooops something went wrong!");
+      });
   }
 
   viewExpenseItems(item : any) {

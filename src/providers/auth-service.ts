@@ -14,7 +14,7 @@ export class User {
 }
  
 let apiUrl = "http://localhost:8080/auth/",
-    hostedUrl = "http://budget.openode.io/api/";
+    hostedUrl = "http://budget.openode.io/auth/";
 
 @Injectable()
 export class AuthService {
@@ -25,7 +25,7 @@ export class AuthService {
   public login(credentials, type) {
     return new Promise((resolve, reject) =>{
       let headers = new Headers();
-      this.http.post(apiUrl+type, credentials, {headers: headers}).
+      this.http.post(hostedUrl+type, credentials, {headers: headers}).
       subscribe(res =>{
         resolve(res.json());
       }, (err) =>{

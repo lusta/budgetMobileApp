@@ -9,5 +9,101 @@
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-list-header>Entertainment</ion-list-header>
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="..//assets/img/cart.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>parting</h2>
+          <p>Some description here!</p>
+        </ion-label>
+        <ion-checkbox (ionChange)="addToList($event)" item-end color="red">
+        </ion-checkbox>
+      </ion-item>
+  
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="..//assets/img/cart.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>parting</h2>
+          <p>Some description here!</p>
+        </ion-label>
+        <ion-checkbox item-end color="red" checked="true"></ion-checkbox>
+      </ion-item>
+  
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="..//assets/img/cart.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>parting</h2>
+          <p>Some description here!</p>
+        </ion-label>
+        <ion-checkbox item-end color="red" checked="true"></ion-checkbox>
+      </ion-item>
+  
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="..//assets/img/cart.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>parting</h2>
+          <p>Some description here!</p>
+        </ion-label>
+        <ion-checkbox item-end color="red" checked="true"></ion-checkbox>
+      </ion-item>
+  
+    </ion-list>
+  
+    <ion-list>
+  
+      <ion-list-header>Foooood</ion-list-header>
+  
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="..//assets/img/cart.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>Rice</h2>
+          <p>some description here.</p>
+        </ion-label>
+        <ion-checkbox item-end color="red" checked="true"></ion-checkbox>
+      </ion-item>
+  
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="..//assets/img/cart.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>Rice</h2>
+          <p>some description here.</p>
+        </ion-label>
+        <ion-checkbox item-end color="red" checked="true"></ion-checkbox>
+      </ion-item>
+  
+      <ion-item>
+        <ion-avatar item-start>
+          <img src="..//assets/img/cart.png">
+        </ion-avatar>
+        <ion-label>
+          <h2>Rice</h2>
+          <p>some description here.</p>
+        </ion-label>
+        <ion-checkbox (ionChange)="addToList($event)" item-end color="red">
+        </ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-buttons start>
+      <button (click)="saveBudget()" ion-button icon-left>
+        <ion-icon name="add"></ion-icon>
+        Save
+      </button>
+      <button (click)="cancel()" ion-button icon-left>
+        <ion-icon name="home"></ion-icon>
+        Cancel
+      </button>
+    </ion-buttons>
 </ion-content>

@@ -1,5 +1,6 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { UserData } from '../app/userData';
 import 'rxjs/add/operator/map';
 
 import 'rxjs/add/operator/toPromise';
@@ -8,8 +9,8 @@ import { ExpenseItem } from './../models/ExpenseItem';
 
 @Injectable()
 export class ExpenseItemService {
-  private userData = JSON.parse(localStorage.getItem('userData'));
-  private token = this.userData !== null ? "?token="+this.userData.token : "";
+
+  private token = "";
   private headers = new Headers({
     'Content-Type': 'application/json',
   });
@@ -17,14 +18,16 @@ export class ExpenseItemService {
   private onlineUrl = "http://budget.openode.io/api/expenseItem/";
   private data : any;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private userData : UserData) {
+    this.token = this.userData.getUserToken() !== null ? "?token="+ this.userData.getUserToken() : "";
+  }
 
   getAll(expenseId): Promise<ExpenseItem[]> {
     this.data = {
       expense : JSON.stringify(expenseId),
       headers: this.headers
     };
-    return this.http.get(this.baseUrl+"list"+this.token, this.data)
+    return this.http.get(this.onlineUrl+"list"+this.token, this.data)
         .toPromise()
         .then(response => response.json() as ExpenseItem[])
         .catch(this.handleError);
@@ -32,7 +35,7 @@ export class ExpenseItemService {
 
 
   getById(id: string): {} {
-    const url = `${this.baseUrl}?_id=${id}`;
+    const url = `${this.onlineUrl}?_id=${id}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json())
@@ -40,7 +43,7 @@ export class ExpenseItemService {
   }
 
   delete(id: string): Promise<void> {
-    const url = `${this.baseUrl}?_id=${id}`;
+    const url = `${this.onlineUrl}?_id=${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)
@@ -49,14 +52,14 @@ export class ExpenseItemService {
 
   create(expenseItem : any): Promise<{}> {
     return this.http
-      .post(this.baseUrl+this.token, JSON.stringify(expenseItem), {headers: this.headers})
+      .post(this.onlineUrl+this.token, JSON.stringify(expenseItem), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
   }
 
   update(expenseItem: any): Promise<{}> {
-    const url = `${this.baseUrl}${expenseItem.Id}`;
+    const url = `${this.onlineUrl}${expenseItem.Id}`;
     return this.http
       .put(url+this.token, JSON.stringify(expenseItem), {headers: this.headers})
       .toPromise()

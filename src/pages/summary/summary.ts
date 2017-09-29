@@ -25,9 +25,9 @@ export class Summary {
  
             type: 'bar',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: ["Food", "Savings", "Entertainment", "Policies", "investments", "other"],
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'overall',
                     data: [12, 19, 3, 5, 2, 3],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -64,7 +64,7 @@ export class Summary {
  
             type: 'doughnut',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: ["Food", "Savings", "Entertainment", "Policies", "investments", "other"],
                 datasets: [{
                     label: '# of Votes',
                     data: [12, 19, 3, 5, 2, 3],

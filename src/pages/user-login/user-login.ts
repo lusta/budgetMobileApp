@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserData } from '../../app/userData';
 import { IonicPage, NavController, AlertController, LoadingController, Loading, MenuController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 
@@ -19,6 +20,7 @@ export class UserLogin {
 
   constructor(private navCtrl: NavController, 
     private auth: AuthService, 
+    private userData : UserData,
     private alertCtrl: AlertController, 
     private loadingCtrl: LoadingController,
     private menu : MenuController) {
@@ -41,7 +43,7 @@ export class UserLogin {
       this.auth.login(this.registerCredentials, "signin").then((result) =>{
       this.resposeData = result;
         if(this.resposeData.success) {
-          localStorage.setItem('userData', JSON.stringify(this.resposeData) )
+          this.userData.setUserData(this.resposeData);
           this.menu.enable(true);
           this.navCtrl.push(Dashboard);
         }
