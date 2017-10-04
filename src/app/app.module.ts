@@ -27,6 +27,8 @@ import { Login } from './../pages/login/login';
 import { Register } from './../pages/register/register';
 import { ExpensePage } from './../pages/expenses/expenses';
 import { Budget } from './../pages/budget/budget';
+import { BudgetList } from './../pages/budget/list/budget-list';
+import { BudgetDetail } from './../pages/budget/details/budget-detail';
 import { Income } from './../pages/income/income';
 import { Summary } from './../pages/summary/summary';
 import { ExpenseItems } from './../pages/expense-items/expense-items';
@@ -43,6 +45,8 @@ import { AddExpenseItemPage } from './../pages/expense-items/add-expense-item/ad
     Summary,
     Register,
     Dashboard,
+    BudgetList,
+    BudgetDetail,
     ExpensePage,
     ExpenseItems,
     AddExpensePage,
@@ -67,6 +71,8 @@ import { AddExpenseItemPage } from './../pages/expense-items/add-expense-item/ad
     Dashboard,
     Profile,
     Register,
+    BudgetList,
+    BudgetDetail,
     ExpensePage,
     ExpenseItems,
     AddExpensePage,

@@ -9,6 +9,8 @@ import { Expense } from './../models/expense';
 
 @Injectable()
 export class ExpenseService {
+
+  private Token : any;
   private token = "";
   private headers = new Headers({
     'Content-Type': 'application/json'
@@ -18,9 +20,9 @@ export class ExpenseService {
 
   constructor(private http: Http, private userData : UserData) {
     this.userData.getUserToken();
-    this.userData.getUserName();
+    this.Token = this.userData;
     this.token = this.userData !== null ? "?token="+ this.userData.token : "";
-    console.log(this.userData.token);
+    console.log(this.Token);
   }
 
   getAll(): Promise<Expense[]> {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { ExpenseItemService } from './../../providers/expense-item-service';
+import { AddExpenseItemPage } from './add-expense-item/add-expense-item';
 
 @Component({
   selector: 'page-expense-items',
@@ -14,7 +15,7 @@ export class ExpenseItems implements OnInit{
     public navCtrl: NavController,
     public EiService : ExpenseItemService,
     public toastCtrl: ToastController) {
-    this.expense = navParams.get('item');
+    this.expense = navParams.get('expense');
   }
 
   ionViewDidLoad() {
@@ -23,6 +24,10 @@ export class ExpenseItems implements OnInit{
 
   ngOnInit() {
     this.getExpenseItems();
+  }
+
+  addExpenseItem() {
+    this.navCtrl.push(AddExpenseItemPage);
   }
 
   presentToast(message : any) {
