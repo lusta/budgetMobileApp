@@ -6,7 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Profile } from '../pages/profile/profile';
 import { UserLogin } from '../pages/user-login/user-login';
-import { Budget } from './../pages/budget/budget';
+import { BudgetList } from './../pages/budget/list/budget-list';
 import { Summary } from './../pages/summary/summary';
 import { Income } from './../pages/income/income';
 import { ExpensePage } from './../pages/expenses/expenses';
@@ -37,7 +37,7 @@ export class MyApp {
       { title: 'Dashboard', icon:'home', component: Dashboard },
       { title: 'Income' , icon:'cash', component: Income },
       { title: 'Expenses', icon:'cart', component: ExpensePage },
-      { title: 'Budget', icon:'briefcase', component: Budget },
+      { title: 'Budget', icon:'briefcase', component: BudgetList },
       { title: 'Summary', icon:'settings', component: Summary },
       { title: 'Profile', icon:'contact', component: Profile },
       { title: 'Log out', icon:'exit', component: UserLogin }

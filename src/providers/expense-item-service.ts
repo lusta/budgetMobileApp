@@ -10,24 +10,46 @@ import { ExpenseItem } from './../models/ExpenseItem';
 @Injectable()
 export class ExpenseItemService {
 
-  private token = "";
-  private headers = new Headers({
-    'Content-Type': 'application/json',
-  });
-  private baseUrl = 'http://localhost:8080/api/expenseItem/';
-  private onlineUrl = "http://budget.openode.io/api/expenseItem/";
+  private token : any;
   private data : any;
+  userInfo = { token : '' };
+  private headers = new Headers({
+    'Content-Type': 'application/json'
+  });
+  private baseUrl = 'http://localhost:8080/api/expense/';
+  private onlineUrl = "http://budget.openode.io/api/expense/";
 
   constructor(private http: Http, private userData : UserData) {
-    this.token = this.userData.getUserToken() !== null ? "?token="+ this.userData.getUserToken() : "";
+    this.getUserToken();
+    this.token = this.userData !== null ? "?token="+ this.userInfo.token : "";
   }
 
-  getAll(expenseId): Promise<ExpenseItem[]> {
+  getUserToken() {
+    this.userData.getUserToken()
+      .then(data => {
+        this.userInfo.token = data.token;
+      })
+      .catch(error => {
+        
+      })
+  }
+
+  getAll(): Promise<ExpenseItem[]> {
+    this.data = {
+      headers: this.headers
+    };
+    return this.http.get(this.baseUrl+"list", this.data)
+        .toPromise()
+        .then(response => response.json() as ExpenseItem[])
+        .catch(this.handleError);
+  }
+
+  getByExpense(expenseId): Promise<ExpenseItem[]> {
     this.data = {
       expense : JSON.stringify(expenseId),
       headers: this.headers
     };
-    return this.http.get(this.onlineUrl+"list"+this.token, this.data)
+    return this.http.get(this.baseUrl+"list", this.data)
         .toPromise()
         .then(response => response.json() as ExpenseItem[])
         .catch(this.handleError);

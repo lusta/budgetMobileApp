@@ -34,6 +34,7 @@ import { Summary } from './../pages/summary/summary';
 import { ExpenseItems } from './../pages/expense-items/expense-items';
 import { AddExpensePage } from './../pages/expenses/add-expense/add-expense';
 import { AddExpenseItemPage } from './../pages/expense-items/add-expense-item/add-expense-item';
+import { BudgetService } from './../providers/budget-service';
  
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { AddExpenseItemPage } from './../pages/expense-items/add-expense-item/ad
     UserData,
     FilePath,
     AuthService,
+    BudgetService,
     ExpenseService,
     ExpenseItemService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

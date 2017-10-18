@@ -5,23 +5,19 @@ import 'rxjs/add/operator/map';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Expense } from './../models/expense';
-
 @Injectable()
-export class ExpenseService {
-
+export class BudgetService {
   private token : any;
   private test : any;
   private headers = new Headers({
     'Content-Type': 'application/json'
   });
-  private baseUrl = 'http://localhost:8080/api/expense/';
-  private onlineUrl = "http://budget.openode.io/api/expense/";
+  private baseUrl = 'http://localhost:8080/api/budget/';
+  private onlineUrl = "http://budget.openode.io/api/budget/";
 
   constructor(private http: Http, private userData : UserData) {
     this.getUserToken();
     this.token = this.userData !== null ? "?token="+ this.test : "";
-    console.log("token", this.test);
   }
 
   getUserToken() {
@@ -35,11 +31,11 @@ export class ExpenseService {
       })
   }
 
-  getAll(): Promise<Expense[]> {
+  getAll(): Promise<{}> {
     
     return this.http.get(this.baseUrl+"list")
                .toPromise()
-               .then(response => response.json() as Expense[])
+               .then(response => response.json())
                .catch(this.handleError);
   }
 
@@ -60,21 +56,21 @@ export class ExpenseService {
       .catch(this.handleError);
   }
 
-  create(expense : any): Promise<{}> {
-    const url = `${this.onlineUrl}${'add'}`;
+  create(budget : any): Promise<{}> {
+    const url = `${this.baseUrl}${'add'}`;
     return this.http
-      .post(url+this.token, JSON.stringify(expense), {headers: this.headers})
+      .post(url, JSON.stringify(budget), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
   }
 
-  update(expense: any): Promise<any> {
-    const url = `${this.baseUrl}/${expense.Id}`;
+  update(budget: any): Promise<any> {
+    const url = `${this.baseUrl}/${budget.Id}`;
     return this.http
-      .put(url+this.token, JSON.stringify(expense), {headers: this.headers})
+      .put(url+this.token, JSON.stringify(budget), {headers: this.headers})
       .toPromise()
-      .then(() => expense)
+      .then(() => budget)
       .catch(this.handleError);
   }
 
@@ -82,6 +78,5 @@ export class ExpenseService {
     console.error('An error occurred', error); 
     return Promise.reject(error.message || error);
   }
+
 }
-
-

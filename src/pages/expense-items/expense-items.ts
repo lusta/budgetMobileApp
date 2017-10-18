@@ -39,7 +39,7 @@ export class ExpenseItems implements OnInit{
   }
 
   getExpenseItems() : void{
-   this.EiService.getAll(this.expense)
+   this.EiService.getByExpense(this.expense)
     .then(expenseItems => {
       expenseItems.forEach(element => {
         this.data.push(element);

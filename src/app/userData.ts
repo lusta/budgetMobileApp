@@ -14,17 +14,11 @@ export class UserData {
         this.storage.set('userData', userInfor);
     }
 
-    getUserToken() : void {
-        this.userDedails
-            .then(data => {
-                this.token = data.token;
-            })
-            .catch(error => {
-                this.token = null;
-            })
+    getUserToken() : any {
+        return this.storage.get('userData');
     }
 
-    getUserName() : void {
+    getUserName() : any {
         this.userDedails
             .then(data => {
                 this.username = data.username;
