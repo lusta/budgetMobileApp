@@ -12,31 +12,17 @@
       
 <ion-content padding>
  <ion-list>
-    <ion-card (click)="detail()">
+    <ion-card (click)="detail()" *ngFor="let item of data">
         <ion-card-header>
-        Month Here
+         {{item.month}}
         </ion-card-header>
         <ion-card-content>
             <ion-item>
                 <ion-avatar item-start>
                 <img src="..//assets/img/cart.png">
                 </ion-avatar>
-                <h2>Test Item</h2>
-                <p>Test Description.</p>
-            </ion-item>
-        </ion-card-content>
-    </ion-card>
-    <ion-card>
-        <ion-card-header>
-        Month Here
-        </ion-card-header>
-        <ion-card-content>
-            <ion-item>
-                <ion-avatar item-start>
-                <img src="..//assets/img/cart.png">
-                </ion-avatar>
-                <h2>Test Item</h2>
-                <p>Test Description.</p>
+                <h2>{{item.amount}}</h2>
+                <p>{{item.description}}.</p>
             </ion-item>
         </ion-card-content>
     </ion-card>

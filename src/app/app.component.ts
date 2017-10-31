@@ -1,5 +1,4 @@
 import { Storage } from '@ionic/storage';
-import { UserData } from './userData';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -11,6 +10,7 @@ import { Summary } from './../pages/summary/summary';
 import { Income } from './../pages/income/income';
 import { ExpensePage } from './../pages/expenses/expenses';
 import { Dashboard } from '../pages/dashboard/dashboard';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -25,12 +25,13 @@ export class MyApp {
   constructor(
     public platform: Platform,
     private storage : Storage,
-    private userData : UserData,
     public menu: MenuController,
     public statusBar : StatusBar,
     public splashscreen : SplashScreen
   ) {
-    this.rootPage = this.userData.isLoggedIn() ? Dashboard : UserLogin;
+    storage.get('userData').then((data) => {
+      this.rootPage = data!== null ? Dashboard : UserLogin;
+    });
     this.initializeApp();
     // set our app's pages
     this.pages = [
@@ -46,7 +47,6 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
@@ -54,12 +54,15 @@ export class MyApp {
     });
   }
 
+  setvalue(data) {
+    this.isLoggedIn = data;
+  }
+
   openPage(page) {
     // close the menu when clicking a link from the menu
     this.menu.close();
     if (page.component === UserLogin) {
-      //localStorage.removeItem('userData');
-      this.userData.removeUserData();
+      this.storage.clear();
     }
     // navigate to the new page if it is not the current page
     this.nav.setRoot(page.component);

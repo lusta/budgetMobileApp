@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 
 import { Budget } from '../budget';
 import { BudgetDetail } from '../details/budget-detail';
+import { BudgetService } from '../../../providers/budget-service';
 
 @Component({
     selector: 'page-budget',
@@ -10,20 +11,40 @@ import { BudgetDetail } from '../details/budget-detail';
   })
 
 export class BudgetList implements OnInit {
-
+    data : any = [];
     constructor( 
-    public Nav : NavController) {}
+    public Nav : NavController,
+    public budgetApi : BudgetService,
+    public toastController : ToastController) {}
 
     ngOnInit(){
-
+        this.list();
     }
     ionViewDidLoad() {
 
-    }  
+    } 
+    list() : void {
+        this.budgetApi.getAll()
+            .then(expenseItems => {
+                expenseItems.forEach(element => {
+                    this.data.push(element);
+                });
+            }).
+            catch(error => {
+            this.presentToast("Ooops something went wrong!");
+        });
+      }  
     Add() {
         this.Nav.push(Budget);
     } 
     detail() {
         this.Nav.push(BudgetDetail);
     }
+    presentToast(message : any) {
+        let toast = this.toastController.create({
+          message: message,
+          duration: 3000
+        });
+        toast.present();
+      }
 }

@@ -1,9 +1,10 @@
 import { Injectable }    from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { UserData } from '../app/userData';
 import 'rxjs/add/operator/map';
 
 import 'rxjs/add/operator/toPromise';
+
+import { Storage } from '@ionic/storage';
 
 import { Expense } from './../models/expense';
 
@@ -11,62 +12,60 @@ import { Expense } from './../models/expense';
 export class ExpenseService {
 
   private token : any;
-  private test : any;
   private headers = new Headers({
     'Content-Type': 'application/json'
   });
   private baseUrl = 'http://localhost:8080/api/expense/';
   private onlineUrl = "http://budget.openode.io/api/expense/";
 
-  constructor(private http: Http, private userData : UserData) {
-    this.getUserToken();
-    this.token = this.userData !== null ? "?token="+ this.test : "";
-    console.log("token", this.test);
-  }
+  constructor(private http: Http, private storage: Storage) {}
 
-  getUserToken() {
-    this.userData.getUserToken()
-      .then(data => {
-        console.log(data);
-        this.test = data.token;
-      })
-      .catch(error => {
-        
-      })
-  }
-
-  getAll(): Promise<Expense[]> {
-    
-    return this.http.get(this.baseUrl+"list")
-               .toPromise()
-               .then(response => response.json() as Expense[])
-               .catch(this.handleError);
+  getAll(): Promise<any> {
+    return this.storage.get('userData').then(data => {
+      let token = data.token;
+      return this.http.get(this.baseUrl+"list?token="+token)
+        .toPromise()
+        .then(response => response.json() as Expense[])
+        .catch(this.handleError);
+    })
+    .catch(this.handleError);
   }
 
 
   getById(id: string): {} {
     const url = `${this.onlineUrl}?_id=${id}`;
-    return this.http.get(url+this.token, {headers: this.headers})
+    return this.storage.get('userData').then(data => {
+      let token = data.token;
+      return this.http.get(url+token, {headers: this.headers})
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
+     });
   }
 
   delete(id: string): Promise<any> {
     const url = `${this.baseUrl}?_id=${id}`;
-    return this.http.delete(url+this.token, {headers: this.headers})
-      .toPromise()
-      .then(() => null)
+    
+      return this.storage.get('userData').then(data => {
+        return this.http.delete(url+"&token="+data.token, {headers: this.headers})
+        .toPromise()
+        .then(() => null)
+        .catch(this.handleError);
+      })
       .catch(this.handleError);
   }
 
-  create(expense : any): Promise<{}> {
-    const url = `${this.onlineUrl}${'add'}`;
-    return this.http
-      .post(url+this.token, JSON.stringify(expense), {headers: this.headers})
+  create(expense : any): Promise<any> {
+    const url = `${this.baseUrl}${'add'}`;
+    return this.storage.get('userData').then(data => {
+      let token = data.token;
+      return this.http
+      .post(url+"?token="+token, JSON.stringify(expense), {headers: this.headers})
       .toPromise()
       .then(res => res.json())
       .catch(this.handleError);
+    })
+    .catch(this.handleError);
   }
 
   update(expense: any): Promise<any> {

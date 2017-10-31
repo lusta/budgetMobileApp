@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { UserData } from '../../app/userData';
 import { IonicPage, NavController, AlertController, LoadingController, Loading, MenuController } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
+import { Storage } from '@ionic/storage';
 
 import { Dashboard } from '../dashboard/dashboard';
 import { UserSignup } from '../user-signup/user-signup';
@@ -20,7 +20,7 @@ export class UserLogin {
 
   constructor(private navCtrl: NavController, 
     private auth: AuthService, 
-    private userData : UserData,
+    private storage: Storage,
     private alertCtrl: AlertController, 
     private loadingCtrl: LoadingController,
     private menu : MenuController) {
@@ -43,7 +43,7 @@ export class UserLogin {
       this.auth.login(this.registerCredentials, "signin").then((result) =>{
       this.resposeData = result;
         if(this.resposeData.success) {
-          this.userData.setUserData(this.resposeData);
+          this.storage.set('userData', this.resposeData);
           this.menu.enable(true);
           this.navCtrl.push(Dashboard);
         }
@@ -72,6 +72,6 @@ export class UserLogin {
       subTitle: text,
       buttons: ['OK']
     });
-    alert.present(prompt);
+    alert.present();
   }
 }

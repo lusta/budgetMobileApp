@@ -9,7 +9,6 @@ import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
-import { UserData } from './userData';
 
 import { HttpModule } from '@angular/http';
 import { AuthService } from './../providers/auth-service';
@@ -23,8 +22,6 @@ import { Dashboard } from '../pages/dashboard/dashboard';
  
 import { MyApp } from './app.component';
 import { Profile } from './../pages/profile/profile';
-import { Login } from './../pages/login/login';
-import { Register } from './../pages/register/register';
 import { ExpensePage } from './../pages/expenses/expenses';
 import { Budget } from './../pages/budget/budget';
 import { BudgetList } from './../pages/budget/list/budget-list';
@@ -40,11 +37,9 @@ import { BudgetService } from './../providers/budget-service';
   declarations: [
     MyApp,
     Profile,
-    Login,
     Budget,
     Income,
     Summary,
-    Register,
     Dashboard,
     BudgetList,
     BudgetDetail,
@@ -60,18 +55,19 @@ import { BudgetService } from './../providers/budget-service';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot({
+      name: '__mydb',
+         driverOrder: ['indexeddb', 'sqlite', 'websql']
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    Login,
     Budget,
     Income,
     Summary,
     Dashboard,
     Profile,
-    Register,
     BudgetList,
     BudgetDetail,
     ExpensePage,
@@ -88,13 +84,12 @@ import { BudgetService } from './../providers/budget-service';
     File,
     Transfer,
     Camera,
-    UserData,
     FilePath,
     AuthService,
     BudgetService,
     ExpenseService,
     ExpenseItemService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
