@@ -40,7 +40,7 @@ export class BudgetService {
 
   delete(id: string): Promise<any> {
     const url = `${this.baseUrl}?_id=${id}`;
-    
+
       return this.storage.get('userData').then(data => {
         return this.http.delete(url+"&token="+data.token, {headers: this.headers})
         .toPromise()
@@ -53,6 +53,7 @@ export class BudgetService {
   create(budget : any): Promise<{}> {
     const url = `${this.baseUrl}${'add'}`;
     return this.storage.get('userData').then(data => {
+      budget.user = data.userId;
       let token = data.token;
       return this.http
         .post(url+"?token="+token, JSON.stringify(budget), {headers: this.headers})
@@ -73,7 +74,7 @@ export class BudgetService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); 
+    console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 

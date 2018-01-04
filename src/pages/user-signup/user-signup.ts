@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, 
+import { IonicPage, NavController,
   NavParams, Loading, LoadingController,
   AlertController } from 'ionic-angular';
 
@@ -32,18 +32,18 @@ export class UserSignup {
     console.log('ionViewDidLoad UserSignup');
   }
 
-  dashboardPage(){ 
-    this.navCtrl.push(Dashboard); 
+  dashboardPage(){
+    this.navCtrl.push(Dashboard);
   }
-  loginPage(){ 
+  loginPage(){
     this.navCtrl.push(UserLogin);
   }
-  forgotPasswordPage(){ 
+  forgotPasswordPage(){
     this.navCtrl.push(UserForgotpassword);
   }
   register() {
-    this.showLoading()
     if(this.registerCredentials.username !== "" && this.registerCredentials.password !== "") {
+      this.showLoading()
       this.Auth.register(this.registerCredentials, "signup").then((result) =>{
       this.resposeData = result;
         if(this.resposeData.success) {
@@ -65,10 +65,10 @@ export class UserSignup {
     });
     this.loading.present();
   }
- 
+
   showError(text) {
     this.loading.dismiss();
- 
+
     let alert = this.alertCtrl.create({
       title: 'Fail',
       subTitle: text,
