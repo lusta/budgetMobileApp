@@ -9,10 +9,10 @@
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-      
+
 <ion-content padding>
  <ion-list>
-    <ion-card (click)="detail()" *ngFor="let item of data">
+    <ion-card (click)="detail(item)" *ngFor="let item of data">
         <ion-card-header>
          {{item.month}}
         </ion-card-header>

@@ -12,7 +12,7 @@ import { BudgetService } from '../../../providers/budget-service';
 
 export class BudgetList implements OnInit {
     data : any = [];
-    constructor( 
+    constructor(
     public Nav : NavController,
     public budgetApi : BudgetService,
     public toastController : ToastController) {}
@@ -22,7 +22,7 @@ export class BudgetList implements OnInit {
     }
     ionViewDidLoad() {
 
-    } 
+    }
     list() : void {
         this.budgetApi.getAll()
             .then(expenseItems => {
@@ -33,12 +33,14 @@ export class BudgetList implements OnInit {
             catch(error => {
             this.presentToast("Ooops something went wrong!");
         });
-      }  
+      }
     Add() {
         this.Nav.push(Budget);
-    } 
-    detail() {
-        this.Nav.push(BudgetDetail);
+    }
+    detail(details : any) {
+        this.Nav.push(BudgetDetail,{
+          budgetDetails : details
+        });
     }
     presentToast(message : any) {
         let toast = this.toastController.create({

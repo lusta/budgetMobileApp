@@ -7,16 +7,29 @@
 <ion-content padding>
     <ion-card>
         <ion-card-header>
-        Month Here
+         {{data.month}}
         </ion-card-header>
         <ion-card-content>
             <ion-item>
                 <ion-avatar item-start>
-                  <img src="..//assets/img/cart.png">
+                <img src="..//assets/img/cart.png">
                 </ion-avatar>
-                <h2>Test Item</h2>
-                <p>Test Description.</p>
+                <h2>{{data.amount}}</h2>
+                <p>{{data.description}}.</p>
             </ion-item>
         </ion-card-content>
     </ion-card>
-   </ion-content>
+    <ion-card>
+      <ion-list>
+        <ion-list-header>
+          <h2>Expense Items</h2>
+        </ion-list-header>
+      <ion-item *ngFor="let item of data.expenseitems">
+        <ion-icon name="checkmark-circle-outline" item-start></ion-icon>
+          <h2>{{item.name}}</h2>
+          <p>{{item.description}}</p>
+          <p item-end>R {{item.price}}</p>
+      </ion-item>
+    </ion-list>
+    </ion-card>
+</ion-content>
